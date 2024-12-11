@@ -1,6 +1,8 @@
-node_modules
+# Mengabaikan folder node_modules
+node_modules/
 
-
+# Mengabaikan file .env
 .env
 
+# Mengabaikan file testing.json
 testing.json
