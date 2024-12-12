@@ -8,7 +8,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MAX_FILE_SIZE = 1000000; 
-const modelUrl = "https://storage.googleapis.com/submission-amig-nofan/submissions-model%20(1)/model.json";
+const modelUrl = "https://storage.googleapis.com/submission-mlgc-nofan/submissions-model%20(1)/model.json";
 
 
 const firestore = new Firestore({
@@ -16,6 +16,9 @@ const firestore = new Firestore({
     keyFilename: process.env.GOOGLE_CLOUD_CREDENTIALS,
     databaseId: process.env.DATABASE_ID
 });
+console.log("Using project ID:", process.env.PROJECT_ID);
+console.log("Using credentials:", process.env.GOOGLE_CLOUD_CREDENTIALS);
+
 
 let model;
 
