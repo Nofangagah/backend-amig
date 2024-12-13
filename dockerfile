@@ -17,5 +17,5 @@ EXPOSE 8080
 # Set the environment variable for the port (use 8080 since Cloud Run uses this port)
 ENV PORT=8080
 
-# Start the app
+
 CMD ["node", "index.js"]
