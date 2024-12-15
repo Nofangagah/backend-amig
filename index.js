@@ -78,19 +78,20 @@ app.post("/predict", upload.single("image"), async (req, res) => {
         const result = probability > threshold ? "Cancer" : "Non-cancer";
 
         // Struktur respons sesuai spesifikasi
+        const id = uuidv4(); // Membuat ID unik sesuai UUID
         const response = {
             status: "success",
             message: "Model is predicted successfully",
             data: {
-                id: uuidv4(),
+                id: id, // Menyimpan ID di sini
                 result: result,
                 suggestion: result === "Cancer" ? "Segera periksa ke dokter!" : "Penyakit kanker tidak terdeteksi.",
                 createdAt: new Date().toISOString(),
             },
         };
 
-        // Simpan hasil prediksi ke Firestore
-        await firestore.collection("predictions").add(response.data);
+        // Simpan hasil prediksi ke Firestore dengan ID sesuai ID yang di-generate
+        await firestore.collection("predictions").doc(id).set(response.data);
 
         // Kirim respons
         res.status(201).json(response);
@@ -102,6 +103,7 @@ app.post("/predict", upload.single("image"), async (req, res) => {
         });
     }
 });
+
 
 // Endpoint untuk mendapatkan riwayat prediksi
 app.get("/predict/histories", async (req, res) => {
